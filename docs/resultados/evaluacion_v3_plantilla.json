@@ -2,9 +2,9 @@
   "actas": [
     {
       "campos_evaluados": 43,
-      "campos_correctos": 21,
-      "exactitud_campo": 0.4884,
-      "cer_promedio": 0.4302,
+      "campos_correctos": 28,
+      "exactitud_campo": 0.6512,
+      "cer_promedio": 0.3566,
       "acta_perfecta": false,
       "errores": [
         {
@@ -13,27 +13,12 @@
           "leido": null
         },
         {
-          "campo": "partido_20",
-          "oficial": 0,
-          "leido": 7
-        },
-        {
           "campo": "partido_06",
           "oficial": 13,
-          "leido": 143
-        },
-        {
-          "campo": "partido_24",
-          "oficial": 18,
-          "leido": 48
+          "leido": 3
         },
         {
           "campo": "partido_34",
-          "oficial": 1,
-          "leido": null
-        },
-        {
-          "campo": "partido_02",
           "oficial": 1,
           "leido": null
         },
@@ -48,39 +33,9 @@
           "leido": 418
         },
         {
-          "campo": "partido_01",
-          "oficial": 4,
-          "leido": null
-        },
-        {
-          "campo": "partido_11",
-          "oficial": 4,
-          "leido": null
-        },
-        {
-          "campo": "partido_37",
-          "oficial": 1,
-          "leido": null
-        },
-        {
           "campo": "partido_38",
           "oficial": 1,
-          "leido": null
-        },
-        {
-          "campo": "partido_21",
-          "oficial": 22,
-          "leido": 212
-        },
-        {
-          "campo": "partido_28",
-          "oficial": 0,
-          "leido": null
-        },
-        {
-          "campo": "partido_16",
-          "oficial": 8,
-          "leido": 0
+          "leido": 4
         },
         {
           "campo": "partido_29",
@@ -95,42 +50,52 @@
         {
           "campo": "partido_33",
           "oficial": 19,
-          "leido": 119
+          "leido": 179
         },
         {
           "campo": "partido_22",
           "oficial": 1,
-          "leido": null
+          "leido": 4
         },
         {
           "campo": "votos_nulos",
           "oficial": 17,
-          "leido": null
+          "leido": 14
         },
         {
           "campo": "total_emitidos",
           "oficial": 180,
-          "leido": 1780
+          "leido": 182
+        },
+        {
+          "campo": "total_electores",
+          "oficial": 230,
+          "leido": 236
+        },
+        {
+          "campo": "numero_mesa",
+          "oficial": 1,
+          "leido": 600111
         },
         {
           "campo": "total_ciudadanos",
           "oficial": 180,
-          "leido": 1
+          "leido": 3802
         }
       ],
       "mesa": "000001"
     },
     {
       "campos_evaluados": 43,
-      "campos_correctos": 15,
-      "exactitud_campo": 0.3488,
-      "cer_promedio": 0.5891,
+      "campos_correctos": 17,
+      "exactitud_campo": 0.3953,
+      "cer_promedio": 0.6124,
       "acta_perfecta": false,
       "errores": [
         {
           "campo": "partido_19",
           "oficial": 0,
-          "leido": null
+          "leido": 7
         },
         {
           "campo": "partido_26",
@@ -140,7 +105,7 @@
         {
           "campo": "partido_25",
           "oficial": 1,
-          "leido": null
+          "leido": 4
         },
         {
           "campo": "partido_30",
@@ -153,19 +118,19 @@
           "leido": null
         },
         {
+          "campo": "partido_27",
+          "oficial": 1,
+          "leido": 6
+        },
+        {
           "campo": "partido_13",
           "oficial": 0,
           "leido": null
         },
         {
-          "campo": "partido_08",
-          "oficial": 0,
-          "leido": null
-        },
-        {
-          "campo": "partido_09",
-          "oficial": 0,
-          "leido": null
+          "campo": "partido_38",
+          "oficial": 1,
+          "leido": 4
         },
         {
           "campo": "partido_07",
@@ -173,49 +138,24 @@
           "leido": null
         },
         {
-          "campo": "partido_18",
-          "oficial": 0,
-          "leido": null
-        },
-        {
           "campo": "partido_34",
           "oficial": 0,
-          "leido": null
+          "leido": 3
         },
         {
           "campo": "partido_24",
           "oficial": 30,
-          "leido": 310
+          "leido": 3
         },
         {
           "campo": "partido_20",
           "oficial": 0,
-          "leido": null
-        },
-        {
-          "campo": "partido_17",
-          "oficial": 4,
-          "leido": null
-        },
-        {
-          "campo": "partido_03",
-          "oficial": 13,
-          "leido": 143
-        },
-        {
-          "campo": "partido_02",
-          "oficial": 0,
-          "leido": null
-        },
-        {
-          "campo": "partido_29",
-          "oficial": 0,
-          "leido": null
+          "leido": 6
         },
         {
           "campo": "partido_10",
           "oficial": 0,
-          "leido": null
+          "leido": 7
         },
         {
           "campo": "partido_35",
@@ -230,17 +170,22 @@
         {
           "campo": "partido_05",
           "oficial": 0,
-          "leido": null
+          "leido": 7
         },
         {
-          "campo": "partido_01",
-          "oficial": 3,
-          "leido": null
+          "campo": "partido_21",
+          "oficial": 20,
+          "leido": 22
+        },
+        {
+          "campo": "partido_33",
+          "oficial": 24,
+          "leido": 4
         },
         {
           "campo": "partido_36",
           "oficial": 0,
-          "leido": 1
+          "leido": 4
         },
         {
           "campo": "votos_blancos",
@@ -250,37 +195,47 @@
         {
           "campo": "votos_nulos",
           "oficial": 12,
-          "leido": 1
+          "leido": 5
         },
         {
           "campo": "votos_impugnados",
           "oficial": 0,
-          "leido": null
+          "leido": 4
         },
         {
           "campo": "total_emitidos",
           "oficial": 170,
-          "leido": 540
+          "leido": 9
+        },
+        {
+          "campo": "total_electores",
+          "oficial": 230,
+          "leido": 236
+        },
+        {
+          "campo": "numero_mesa",
+          "oficial": 2,
+          "leido": 60012
         },
         {
           "campo": "total_ciudadanos",
           "oficial": 170,
-          "leido": 20
+          "leido": 22
         }
       ],
       "mesa": "000002"
     },
     {
       "campos_evaluados": 43,
-      "campos_correctos": 25,
-      "exactitud_campo": 0.5814,
-      "cer_promedio": 0.345,
+      "campos_correctos": 24,
+      "exactitud_campo": 0.5581,
+      "cer_promedio": 0.3876,
       "acta_perfecta": false,
       "errores": [
         {
           "campo": "partido_15",
           "oficial": 13,
-          "leido": 413
+          "leido": 3
         },
         {
           "campo": "partido_31",
@@ -293,19 +248,14 @@
           "leido": 4
         },
         {
+          "campo": "partido_24",
+          "oficial": 28,
+          "leido": 218
+        },
+        {
           "campo": "partido_03",
           "oficial": 22,
-          "leido": 212
-        },
-        {
-          "campo": "partido_05",
-          "oficial": 0,
-          "leido": null
-        },
-        {
-          "campo": "partido_18",
-          "oficial": 0,
-          "leido": null
+          "leido": 2
         },
         {
           "campo": "partido_26",
@@ -318,14 +268,9 @@
           "leido": null
         },
         {
-          "campo": "partido_37",
-          "oficial": 1,
-          "leido": 4
-        },
-        {
-          "campo": "partido_34",
-          "oficial": 0,
-          "leido": null
+          "campo": "partido_33",
+          "oficial": 23,
+          "leido": 3
         },
         {
           "campo": "partido_27",
@@ -333,14 +278,14 @@
           "leido": null
         },
         {
-          "campo": "partido_06",
-          "oficial": 26,
-          "leido": 20
+          "campo": "partido_16",
+          "oficial": 20,
+          "leido": 240
         },
         {
-          "campo": "partido_19",
-          "oficial": 0,
-          "leido": null
+          "campo": "partido_06",
+          "oficial": 26,
+          "leido": 6
         },
         {
           "campo": "partido_21",
@@ -353,44 +298,54 @@
           "leido": null
         },
         {
+          "campo": "votos_blancos",
+          "oficial": 26,
+          "leido": 2
+        },
+        {
           "campo": "votos_nulos",
           "oficial": 11,
-          "leido": 17
+          "leido": 44
         },
         {
           "campo": "total_emitidos",
           "oficial": 247,
-          "leido": 241
+          "leido": 243
+        },
+        {
+          "campo": "total_electores",
+          "oficial": 300,
+          "leido": 30
+        },
+        {
+          "campo": "numero_mesa",
+          "oficial": 3,
+          "leido": 60013
         },
         {
           "campo": "total_ciudadanos",
           "oficial": 247,
-          "leido": 22414
+          "leido": 11
         }
       ],
       "mesa": "000003"
     },
     {
       "campos_evaluados": 43,
-      "campos_correctos": 26,
-      "exactitud_campo": 0.6047,
-      "cer_promedio": 0.3256,
+      "campos_correctos": 28,
+      "exactitud_campo": 0.6512,
+      "cer_promedio": 0.3798,
       "acta_perfecta": false,
       "errores": [
         {
           "campo": "partido_21",
           "oficial": 29,
-          "leido": 24
-        },
-        {
-          "campo": "partido_24",
-          "oficial": 31,
-          "leido": 34
+          "leido": 2
         },
         {
           "campo": "partido_16",
           "oficial": 20,
-          "leido": 120
+          "leido": 2
         },
         {
           "campo": "partido_26",
@@ -405,7 +360,7 @@
         {
           "campo": "partido_06",
           "oficial": 9,
-          "leido": null
+          "leido": 0
         },
         {
           "campo": "partido_33",
@@ -418,58 +373,53 @@
           "leido": 4
         },
         {
-          "campo": "partido_28",
-          "oficial": 0,
-          "leido": null
-        },
-        {
-          "campo": "partido_05",
-          "oficial": 0,
-          "leido": null
-        },
-        {
           "campo": "partido_20",
           "oficial": 0,
-          "leido": null
+          "leido": 6
         },
         {
           "campo": "partido_37",
           "oficial": 0,
-          "leido": null
+          "leido": 6
         },
         {
           "campo": "partido_36",
           "oficial": 0,
-          "leido": 1
+          "leido": 7
         },
         {
           "campo": "votos_blancos",
           "oficial": 23,
-          "leido": 73
+          "leido": 3
         },
         {
           "campo": "votos_nulos",
           "oficial": 40,
-          "leido": 139
+          "leido": 39
         },
         {
-          "campo": "total_emitidos",
-          "oficial": 230,
-          "leido": 2130
+          "campo": "total_electores",
+          "oficial": 300,
+          "leido": 306
+        },
+        {
+          "campo": "numero_mesa",
+          "oficial": 4,
+          "leido": 600114
         },
         {
           "campo": "total_ciudadanos",
           "oficial": 230,
-          "leido": 123
+          "leido": 12
         }
       ],
       "mesa": "000004"
     },
     {
       "campos_evaluados": 43,
-      "campos_correctos": 28,
-      "exactitud_campo": 0.6512,
-      "cer_promedio": 0.3062,
+      "campos_correctos": 27,
+      "exactitud_campo": 0.6279,
+      "cer_promedio": 0.3682,
       "acta_perfecta": false,
       "errores": [
         {
@@ -480,37 +430,27 @@
         {
           "campo": "partido_10",
           "oficial": 8,
-          "leido": 7
-        },
-        {
-          "campo": "partido_12",
-          "oficial": 4,
-          "leido": 1
+          "leido": 0
         },
         {
           "campo": "partido_31",
           "oficial": 6,
-          "leido": null
+          "leido": 0
         },
         {
           "campo": "partido_21",
           "oficial": 38,
-          "leido": 318
+          "leido": 3
+        },
+        {
+          "campo": "partido_01",
+          "oficial": 2,
+          "leido": null
         },
         {
           "campo": "partido_23",
           "oficial": 1,
-          "leido": null
-        },
-        {
-          "campo": "partido_30",
-          "oficial": 0,
-          "leido": null
-        },
-        {
-          "campo": "partido_09",
-          "oficial": 0,
-          "leido": null
+          "leido": 4
         },
         {
           "campo": "partido_24",
@@ -518,19 +458,29 @@
           "leido": 34
         },
         {
-          "campo": "partido_03",
-          "oficial": 15,
+          "campo": "partido_35",
+          "oficial": 0,
           "leido": null
         },
         {
-          "campo": "partido_16",
-          "oficial": 15,
-          "leido": 115
+          "campo": "partido_33",
+          "oficial": 19,
+          "leido": 49
+        },
+        {
+          "campo": "partido_36",
+          "oficial": 0,
+          "leido": 70
         },
         {
           "campo": "partido_06",
           "oficial": 27,
-          "leido": 44
+          "leido": 2
+        },
+        {
+          "campo": "votos_blancos",
+          "oficial": 28,
+          "leido": 2
         },
         {
           "campo": "votos_impugnados",
@@ -538,54 +488,34 @@
           "leido": null
         },
         {
-          "campo": "total_emitidos",
-          "oficial": 245,
-          "leido": 21415
+          "campo": "total_electores",
+          "oficial": 300,
+          "leido": 309
+        },
+        {
+          "campo": "numero_mesa",
+          "oficial": 5,
+          "leido": 60015
         },
         {
           "campo": "total_ciudadanos",
           "oficial": 245,
-          "leido": 221415
+          "leido": 12
         }
       ],
       "mesa": "000005"
     },
     {
       "campos_evaluados": 43,
-      "campos_correctos": 7,
-      "exactitud_campo": 0.1628,
-      "cer_promedio": 0.8682,
+      "campos_correctos": 17,
+      "exactitud_campo": 0.3953,
+      "cer_promedio": 0.5194,
       "acta_perfecta": false,
       "errores": [
         {
           "campo": "partido_15",
           "oficial": 11,
-          "leido": 441
-        },
-        {
-          "campo": "partido_25",
-          "oficial": 1,
-          "leido": null
-        },
-        {
-          "campo": "partido_02",
-          "oficial": 4,
-          "leido": null
-        },
-        {
-          "campo": "partido_22",
-          "oficial": 4,
-          "leido": null
-        },
-        {
-          "campo": "partido_12",
-          "oficial": 3,
-          "leido": 2
-        },
-        {
-          "campo": "partido_16",
-          "oficial": 22,
-          "leido": 212
+          "leido": 4
         },
         {
           "campo": "partido_27",
@@ -593,19 +523,14 @@
           "leido": null
         },
         {
-          "campo": "partido_20",
-          "oficial": 0,
-          "leido": null
-        },
-        {
           "campo": "partido_05",
           "oficial": 1,
-          "leido": null
+          "leido": 4
         },
         {
           "campo": "partido_26",
           "oficial": 1,
-          "leido": null
+          "leido": 11
         },
         {
           "campo": "partido_37",
@@ -615,12 +540,12 @@
         {
           "campo": "partido_07",
           "oficial": 1,
-          "leido": null
+          "leido": 4
         },
         {
           "campo": "partido_30",
           "oficial": 0,
-          "leido": null
+          "leido": 4
         },
         {
           "campo": "partido_35",
@@ -630,22 +555,17 @@
         {
           "campo": "partido_03",
           "oficial": 12,
-          "leido": 112
+          "leido": 2
         },
         {
           "campo": "partido_13",
           "oficial": 1,
-          "leido": null
-        },
-        {
-          "campo": "partido_38",
-          "oficial": 0,
-          "leido": null
+          "leido": 4
         },
         {
           "campo": "partido_21",
           "oficial": 38,
-          "leido": 318
+          "leido": 3
         },
         {
           "campo": "partido_34",
@@ -653,19 +573,14 @@
           "leido": null
         },
         {
-          "campo": "partido_17",
-          "oficial": 3,
-          "leido": 2
-        },
-        {
           "campo": "partido_18",
           "oficial": 0,
-          "leido": null
+          "leido": 60
         },
         {
           "campo": "partido_06",
           "oficial": 25,
-          "leido": 215
+          "leido": 5
         },
         {
           "campo": "partido_28",
@@ -673,34 +588,19 @@
           "leido": null
         },
         {
-          "campo": "partido_31",
-          "oficial": 3,
-          "leido": null
-        },
-        {
-          "campo": "partido_01",
-          "oficial": 4,
-          "leido": null
-        },
-        {
           "campo": "partido_33",
           "oficial": 27,
-          "leido": null
+          "leido": 4
         },
         {
           "campo": "partido_29",
           "oficial": 2,
-          "leido": null
+          "leido": 7
         },
         {
           "campo": "partido_24",
           "oficial": 22,
-          "leido": 212
-        },
-        {
-          "campo": "partido_32",
-          "oficial": 4,
-          "leido": null
+          "leido": 7
         },
         {
           "campo": "partido_10",
@@ -710,57 +610,77 @@
         {
           "campo": "partido_36",
           "oficial": 0,
-          "leido": null
-        },
-        {
-          "campo": "votos_blancos",
-          "oficial": 34,
-          "leido": 3
+          "leido": 4
         },
         {
           "campo": "votos_nulos",
           "oficial": 21,
-          "leido": 9
+          "leido": 2
         },
         {
           "campo": "votos_impugnados",
           "oficial": 0,
-          "leido": null
+          "leido": 7
         },
         {
           "campo": "total_emitidos",
           "oficial": 258,
-          "leido": 2158
+          "leido": 2
+        },
+        {
+          "campo": "total_electores",
+          "oficial": 300,
+          "leido": 200
         },
         {
           "campo": "numero_mesa",
           "oficial": 6,
-          "leido": 4000006
+          "leido": 66
+        },
+        {
+          "campo": "total_ciudadanos",
+          "oficial": 258,
+          "leido": 253
         }
       ],
       "mesa": "000006"
     },
     {
       "campos_evaluados": 43,
-      "campos_correctos": 16,
-      "exactitud_campo": 0.3721,
-      "cer_promedio": 0.6899,
+      "campos_correctos": 18,
+      "exactitud_campo": 0.4186,
+      "cer_promedio": 0.7093,
       "acta_perfecta": false,
       "errores": [
         {
           "campo": "partido_15",
           "oficial": 10,
-          "leido": 170
+          "leido": 0
         },
         {
           "campo": "partido_34",
           "oficial": 1,
+          "leido": 407843
+        },
+        {
+          "campo": "partido_21",
+          "oficial": 56,
+          "leido": 5
+        },
+        {
+          "campo": "partido_19",
+          "oficial": 0,
           "leido": null
         },
         {
           "campo": "partido_11",
           "oficial": 9,
           "leido": null
+        },
+        {
+          "campo": "partido_24",
+          "oficial": 34,
+          "leido": 3
         },
         {
           "campo": "partido_26",
@@ -770,12 +690,7 @@
         {
           "campo": "partido_05",
           "oficial": 1,
-          "leido": null
-        },
-        {
-          "campo": "partido_18",
-          "oficial": 1,
-          "leido": null
+          "leido": 4
         },
         {
           "campo": "partido_29",
@@ -783,14 +698,14 @@
           "leido": null
         },
         {
-          "campo": "partido_01",
-          "oficial": 1,
-          "leido": null
+          "campo": "partido_03",
+          "oficial": 14,
+          "leido": 44
         },
         {
-          "campo": "partido_07",
-          "oficial": 0,
-          "leido": 7
+          "campo": "partido_10",
+          "oficial": 1,
+          "leido": 4
         },
         {
           "campo": "partido_27",
@@ -800,17 +715,7 @@
         {
           "campo": "partido_16",
           "oficial": 9,
-          "leido": 7
-        },
-        {
-          "campo": "partido_30",
-          "oficial": 0,
-          "leido": null
-        },
-        {
-          "campo": "partido_09",
-          "oficial": 0,
-          "leido": null
+          "leido": 4
         },
         {
           "campo": "partido_35",
@@ -818,24 +723,9 @@
           "leido": null
         },
         {
-          "campo": "partido_22",
-          "oficial": 2,
-          "leido": null
-        },
-        {
           "campo": "partido_12",
           "oficial": 0,
           "leido": null
-        },
-        {
-          "campo": "partido_25",
-          "oficial": 2,
-          "leido": null
-        },
-        {
-          "campo": "partido_33",
-          "oficial": 23,
-          "leido": 213
         },
         {
           "campo": "partido_36",
@@ -845,22 +735,22 @@
         {
           "campo": "partido_02",
           "oficial": 1,
-          "leido": null
+          "leido": 4
         },
         {
           "campo": "partido_28",
           "oficial": 1,
-          "leido": null
+          "leido": 4
         },
         {
           "campo": "votos_blancos",
           "oficial": 36,
-          "leido": 316
+          "leido": 3
         },
         {
           "campo": "votos_nulos",
           "oficial": 19,
-          "leido": 119
+          "leido": null
         },
         {
           "campo": "votos_impugnados",
@@ -870,17 +760,22 @@
         {
           "campo": "total_emitidos",
           "oficial": 251,
-          "leido": 2137
+          "leido": 25
+        },
+        {
+          "campo": "total_electores",
+          "oficial": 300,
+          "leido": 80
         },
         {
           "campo": "numero_mesa",
           "oficial": 7,
-          "leido": 8000007
+          "leido": 600617
         },
         {
           "campo": "total_ciudadanos",
           "oficial": 251,
-          "leido": 72151
+          "leido": 13
         }
       ],
       "mesa": "000007"
@@ -889,33 +784,28 @@
       "campos_evaluados": 43,
       "campos_correctos": 19,
       "exactitud_campo": 0.4419,
-      "cer_promedio": 0.4922,
+      "cer_promedio": 0.6357,
       "acta_perfecta": false,
       "errores": [
         {
           "campo": "partido_35",
           "oficial": 0,
-          "leido": null
+          "leido": 10
         },
         {
           "campo": "partido_13",
           "oficial": 1,
-          "leido": null
+          "leido": 4
         },
         {
-          "campo": "partido_26",
-          "oficial": 0,
-          "leido": 6
-        },
-        {
-          "campo": "partido_07",
+          "campo": "partido_30",
           "oficial": 0,
           "leido": null
         },
         {
           "campo": "partido_15",
           "oficial": 15,
-          "leido": 115
+          "leido": 5
         },
         {
           "campo": "partido_09",
@@ -930,12 +820,17 @@
         {
           "campo": "partido_24",
           "oficial": 28,
-          "leido": 218
+          "leido": 2
+        },
+        {
+          "campo": "partido_06",
+          "oficial": 25,
+          "leido": 125
         },
         {
           "campo": "partido_05",
           "oficial": 1,
-          "leido": null
+          "leido": 11
         },
         {
           "campo": "partido_17",
@@ -950,7 +845,7 @@
         {
           "campo": "partido_36",
           "oficial": 0,
-          "leido": null
+          "leido": 548
         },
         {
           "campo": "partido_08",
@@ -963,19 +858,9 @@
           "leido": null
         },
         {
-          "campo": "partido_21",
-          "oficial": 37,
-          "leido": 1317
-        },
-        {
-          "campo": "partido_20",
-          "oficial": 0,
-          "leido": null
-        },
-        {
           "campo": "partido_34",
           "oficial": 0,
-          "leido": null
+          "leido": 8488
         },
         {
           "campo": "partido_02",
@@ -985,7 +870,7 @@
         {
           "campo": "partido_03",
           "oficial": 11,
-          "leido": 4
+          "leido": 18
         },
         {
           "campo": "partido_33",
@@ -993,60 +878,45 @@
           "leido": 210
         },
         {
-          "campo": "partido_11",
-          "oficial": 2,
-          "leido": 12
-        },
-        {
           "campo": "votos_blancos",
           "oficial": 32,
-          "leido": 31
+          "leido": 3
+        },
+        {
+          "campo": "votos_nulos",
+          "oficial": 29,
+          "leido": 9
         },
         {
           "campo": "total_emitidos",
           "oficial": 252,
-          "leido": 24152
+          "leido": 25
+        },
+        {
+          "campo": "total_electores",
+          "oficial": 300,
+          "leido": 306
+        },
+        {
+          "campo": "numero_mesa",
+          "oficial": 8,
+          "leido": 600118
         },
         {
           "campo": "total_ciudadanos",
           "oficial": 252,
-          "leido": 121512
+          "leido": 5521
         }
       ],
       "mesa": "000008"
     },
     {
       "campos_evaluados": 43,
-      "campos_correctos": 13,
-      "exactitud_campo": 0.3023,
-      "cer_promedio": 0.6783,
+      "campos_correctos": 21,
+      "exactitud_campo": 0.4884,
+      "cer_promedio": 0.5,
       "acta_perfecta": false,
       "errores": [
-        {
-          "campo": "partido_26",
-          "oficial": 0,
-          "leido": 7
-        },
-        {
-          "campo": "partido_31",
-          "oficial": 8,
-          "leido": 18
-        },
-        {
-          "campo": "partido_19",
-          "oficial": 1,
-          "leido": 0
-        },
-        {
-          "campo": "partido_38",
-          "oficial": 1,
-          "leido": 14
-        },
-        {
-          "campo": "partido_21",
-          "oficial": 33,
-          "leido": 313
-        },
         {
           "campo": "partido_36",
           "oficial": 0,
@@ -1055,32 +925,17 @@
         {
           "campo": "partido_10",
           "oficial": 4,
-          "leido": 14
-        },
-        {
-          "campo": "partido_30",
-          "oficial": 0,
-          "leido": null
+          "leido": 1
         },
         {
           "campo": "partido_03",
           "oficial": 17,
-          "leido": 174
+          "leido": 4
         },
         {
           "campo": "partido_06",
           "oficial": 16,
-          "leido": 116
-        },
-        {
-          "campo": "partido_34",
-          "oficial": 1,
-          "leido": 44
-        },
-        {
-          "campo": "partido_13",
-          "oficial": 1,
-          "leido": 0
+          "leido": 4
         },
         {
           "campo": "partido_25",
@@ -1090,12 +945,7 @@
         {
           "campo": "partido_16",
           "oficial": 17,
-          "leido": 473
-        },
-        {
-          "campo": "partido_29",
-          "oficial": 3,
-          "leido": 13
+          "leido": 43
         },
         {
           "campo": "partido_17",
@@ -1103,39 +953,34 @@
           "leido": 9
         },
         {
-          "campo": "partido_23",
-          "oficial": 3,
-          "leido": 13
-        },
-        {
           "campo": "partido_24",
           "oficial": 46,
-          "leido": 7476
-        },
-        {
-          "campo": "partido_02",
-          "oficial": 0,
-          "leido": null
+          "leido": 776
         },
         {
           "campo": "partido_33",
           "oficial": 23,
-          "leido": 913
+          "leido": 93
         },
         {
-          "campo": "partido_01",
-          "oficial": 5,
-          "leido": 15
+          "campo": "partido_11",
+          "oficial": 10,
+          "leido": 1
+        },
+        {
+          "campo": "partido_20",
+          "oficial": 0,
+          "leido": 10
         },
         {
           "campo": "partido_07",
           "oficial": 1,
-          "leido": 14
+          "leido": 4
         },
         {
           "campo": "partido_37",
           "oficial": 1,
-          "leido": 14
+          "leido": 4
         },
         {
           "campo": "partido_09",
@@ -1145,17 +990,17 @@
         {
           "campo": "partido_15",
           "oficial": 14,
-          "leido": 114
+          "leido": 1
         },
         {
           "campo": "votos_blancos",
           "oficial": 23,
-          "leido": 913
+          "leido": 3
         },
         {
           "campo": "votos_nulos",
           "oficial": 16,
-          "leido": 116
+          "leido": 46
         },
         {
           "campo": "votos_impugnados",
@@ -1165,42 +1010,42 @@
         {
           "campo": "total_emitidos",
           "oficial": 257,
-          "leido": 21517
+          "leido": 53
+        },
+        {
+          "campo": "total_electores",
+          "oficial": 300,
+          "leido": 306
+        },
+        {
+          "campo": "numero_mesa",
+          "oficial": 9,
+          "leido": 60019
         },
         {
           "campo": "total_ciudadanos",
           "oficial": 257,
-          "leido": 1191511
+          "leido": 521
         }
       ],
       "mesa": "000009"
     },
     {
       "campos_evaluados": 43,
-      "campos_correctos": 19,
-      "exactitud_campo": 0.4419,
-      "cer_promedio": 0.5194,
+      "campos_correctos": 28,
+      "exactitud_campo": 0.6512,
+      "cer_promedio": 0.2907,
       "acta_perfecta": false,
       "errores": [
         {
           "campo": "partido_06",
           "oficial": 16,
-          "leido": 436
+          "leido": 1
         },
         {
-          "campo": "partido_21",
-          "oficial": 38,
-          "leido": 318
-        },
-        {
-          "campo": "partido_02",
-          "oficial": 4,
-          "leido": null
-        },
-        {
-          "campo": "partido_22",
-          "oficial": 4,
-          "leido": null
+          "campo": "partido_10",
+          "oficial": 2,
+          "leido": 72
         },
         {
           "campo": "partido_23",
@@ -1208,24 +1053,14 @@
           "leido": 4
         },
         {
-          "campo": "partido_37",
-          "oficial": 0,
-          "leido": null
-        },
-        {
           "campo": "partido_15",
           "oficial": 14,
-          "leido": 414
-        },
-        {
-          "campo": "partido_07",
-          "oficial": 1,
-          "leido": null
+          "leido": 18
         },
         {
           "campo": "partido_31",
           "oficial": 4,
-          "leido": null
+          "leido": 44
         },
         {
           "campo": "partido_29",
@@ -1233,39 +1068,19 @@
           "leido": 4
         },
         {
-          "campo": "partido_28",
-          "oficial": 0,
-          "leido": null
-        },
-        {
           "campo": "partido_03",
           "oficial": 20,
-          "leido": 210
+          "leido": 25
         },
         {
-          "campo": "partido_05",
-          "oficial": 1,
-          "leido": 4
+          "campo": "partido_20",
+          "oficial": 2,
+          "leido": 72
         },
         {
-          "campo": "partido_27",
-          "oficial": 0,
-          "leido": null
-        },
-        {
-          "campo": "partido_26",
-          "oficial": 0,
-          "leido": null
-        },
-        {
-          "campo": "partido_33",
-          "oficial": 22,
-          "leido": 212
-        },
-        {
-          "campo": "partido_08",
-          "oficial": 0,
-          "leido": null
+          "campo": "partido_12",
+          "oficial": 3,
+          "leido": 2
         },
         {
           "campo": "partido_17",
@@ -1278,29 +1093,24 @@
           "leido": null
         },
         {
-          "campo": "votos_blancos",
-          "oficial": 35,
-          "leido": 215
-        },
-        {
           "campo": "votos_nulos",
           "oficial": 17,
-          "leido": 417
+          "leido": 11
         },
         {
-          "campo": "total_emitidos",
-          "oficial": 250,
-          "leido": 21510
+          "campo": "total_electores",
+          "oficial": 300,
+          "leido": 306
         },
         {
           "campo": "numero_mesa",
           "oficial": 10,
-          "leido": 2000010
+          "leido": 6000
         },
         {
           "campo": "total_ciudadanos",
           "oficial": 250,
-          "leido": 71250
+          "leido": 2
         }
       ],
       "mesa": "000010"
@@ -1308,10 +1118,10 @@
   ],
   "totales": {
     "actas_evaluadas": 10,
-    "exactitud_campo_global": 0.4395,
+    "exactitud_campo_global": 0.5279,
     "campos_evaluados": 430,
-    "campos_correctos": 189,
-    "cer_promedio_global": 0.5244,
+    "campos_correctos": 227,
+    "cer_promedio_global": 0.476,
     "actas_perfectas": 0,
     "regla_cero": false
   }

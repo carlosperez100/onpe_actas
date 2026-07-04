@@ -170,8 +170,13 @@ def evaluar_acta(pred: dict, gt: dict) -> dict:
     comparaciones = []  # (campo, oficial, leido)
 
     # votos por organización política: solo las posiciones que existen en el
-    # acta según la ONPE (las filas vacías del formulario no se evalúan)
+    # acta según la ONPE. Las filas vacías del formulario (posiciones 04 y 14,
+    # partidos retirados) vienen con votos null en la API y NO se evalúan:
+    # contarlas inflaría la exactitud (null OCR == null oficial es un acierto
+    # espurio, no una lectura).
     for pos, oficial in (gt.get("votos_partido") or {}).items():
+        if oficial is None:
+            continue
         comparaciones.append((f"partido_{pos}", oficial,
                               pred["votos_partido"].get(pos)))
 
