@@ -1,0 +1,37 @@
+name: Descarga periódica de actas ONPE
+
+# Descarga actas nuevas de la ONPE y las commitea al repo (opcional).
+# Desactivado por defecto (solo manual) para no saturar el portal.
+on:
+  workflow_dispatch:
+    inputs:
+      tipo:
+        description: "Tipo de elección"
+        default: "presidencial"
+      max:
+        description: "Máximo de actas"
+        default: "50"
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Instalar dependencias del scraper
+        run: pip install -r src/scraper/requirements.txt
+      - name: Descargar actas
+        run: |
+          python src/scraper/download_actas.py \
+            --tipo "${{ github.event.inputs.tipo }}" \
+            --max "${{ github.event.inputs.max }}" \
+            --out data/raw_pdf
+      - name: Commit de manifest
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git add data/manifest.csv || true
+          git commit -m "actualiza manifest de actas" || echo "sin cambios"
+          git push || echo "nada que subir"

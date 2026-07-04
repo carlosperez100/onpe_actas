@@ -1,0 +1,37 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+env/
+.ipynb_checkpoints/
+
+# Datos pesados (no versionar el dataset; usar el scraper para regenerarlo)
+data/raw_pdf/*
+data/raw_img/*
+data/processed/*
+data/detections/
+data/crops/
+data/ground_truth/
+data/salida/
+data/salida_v2/
+data/salida_final/
+data/manifest.csv
+data/yolo/
+!data/**/.gitkeep
+clase_pdfs/*
+!clase_pdfs/.gitkeep
+
+# Papers del Related Work: NO redistribuir en repo público (copyright CVF/IEEE);
+# los enlaces oficiales de descarga están en docs/RELATED_WORK.md
+docs/papers/
+
+# Modelos / pesos
+*.pt
+*.onnx
+runs/
+
+# Sistema
+.DS_Store
+Thumbs.db

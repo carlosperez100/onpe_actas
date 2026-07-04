@@ -1,0 +1,19 @@
+# Configuración del dataset para YOLO (Ultralytics)
+# Estructura esperada:
+#   data/yolo/images/{train,val}/*.png
+#   data/yolo/labels/{train,val}/*.txt   (formato YOLO: cls cx cy w h normalizado)
+
+path: ../data/yolo
+train: images/train
+val: images/val
+
+names:
+  0: numero_mesa
+  1: tabla_resultados
+  2: total_votos_emitidos
+  3: total_ciudadanos
+  4: votos_blancos
+  5: votos_nulos
+  6: votos_impugnados
+  7: firmas_miembros
+  8: observaciones
