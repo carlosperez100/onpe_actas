@@ -19,6 +19,11 @@ data/salida_v2/
 data/salida_final/
 data/manifest.csv
 data/yolo/
+# muestra nacional: datos pesados fuera; se conservan los JSON de evidencia
+data/muestra/*
+!data/muestra/muestra.json
+!data/muestra/tipos.json
+!data/muestra/electronicas.json
 !data/**/.gitkeep
 clase_pdfs/*
 !clase_pdfs/.gitkeep

@@ -214,6 +214,8 @@ def main():
     ap.add_argument("--out", type=Path, default=Path("../../data/salida"))
     ap.add_argument("--modo", default="limpio", choices=["basico", "limpio"],
                     help="basico = línea base; limpio = aislar tinta + sub-cajas (v2)")
+    ap.add_argument("--slice", dest="slice_", default=None,
+                    help="k/N: procesa solo las actas con índice %% N == k (OCR paralelo)")
     args = ap.parse_args()
 
     args.out.mkdir(parents=True, exist_ok=True)
@@ -221,7 +223,13 @@ def main():
     ocr = OCR(idiomas=("es",))
 
     carpetas = sorted(p for p in args.crops.iterdir() if p.is_dir())
-    log.info("Piloto sobre %s actas", len(carpetas))
+    # OCR paralelo: cada proceso toma una porción disjunta de las actas.
+    if args.slice_:
+        k, tot = (int(x) for x in args.slice_.split("/"))
+        carpetas = [c for i, c in enumerate(carpetas) if i % tot == k]
+        log.info("Slice %s: %s actas de este proceso", args.slice_, len(carpetas))
+    else:
+        log.info("Piloto sobre %s actas", len(carpetas))
 
     resumen = {"actas": [], "totales": {}}
     tot_campos = tot_ok = 0
@@ -257,8 +265,11 @@ def main():
         "actas_perfectas": sum(1 for a in resumen["actas"] if a["acta_perfecta"]),
         "segundos_totales": round(time.time() - t0, 1),
     }
-    (args.out / "evaluacion.json").write_text(
-        json.dumps(resumen, ensure_ascii=False, indent=2), encoding="utf-8")
+    # con --slice cada proceso escribiría el mismo evaluacion.json (colisión);
+    # los JSON por acta ya quedaron escritos y evaluar_salidas.py da el total.
+    if not args.slice_:
+        (args.out / "evaluacion.json").write_text(
+            json.dumps(resumen, ensure_ascii=False, indent=2), encoding="utf-8")
 
     t = resumen["totales"]
     log.info("=" * 60)
