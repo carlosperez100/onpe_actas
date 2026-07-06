@@ -10,7 +10,7 @@ análisis y auditoría.
 
 > 🗳️ **Resumen visual del proyecto** (pipeline, resultados con IC 95%,
 > hallazgos y entregables):
-> **https://claude.ai/code/artifact/f8bc673f-349c-43a1-9917-a08c532980f7**
+> **https://carlosperez100.github.io/onpe_actas/resumen.html**
 >
 > ▶️ **Correrlo tú mismo sin asistente:** doble clic en `EJECUTAR.bat`
 > (guía completa en [docs/COMO_CORRERLO.md](docs/COMO_CORRERLO.md)) ·
