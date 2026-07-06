@@ -2,6 +2,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{graphicx}
+\usepackage{array}
 \usepackage{booktabs}
 \usepackage{amsmath}
 \usepackage{url}
@@ -14,8 +15,12 @@
 
 \begin{document}
 
-\title{\includegraphics[width=2.0cm]{figuras/logo_uni.png}\\[8pt]
-Automatic Extraction of Electoral Results from the Tally Sheets of the 2026 Peruvian General Elections}
+% Logo on the LEFT of the title, single row (m{} column = vertical centering)
+\title{\begin{tabular}{@{}m{2.3cm}@{\hspace{0.3cm}}m{\dimexpr\textwidth-3.0cm\relax}@{}}
+\includegraphics[width=2.1cm]{figuras/logo_uni.png} &
+\centering\arraybackslash Automatic Extraction of Electoral Results from the
+Tally Sheets of the 2026 Peruvian General Elections
+\end{tabular}}
 
 \author{
 \IEEEauthorblockN{Josemanuel Rossy Ca\~nari Palante, Kenny Asto Hinostroza,

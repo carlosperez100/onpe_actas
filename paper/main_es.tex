@@ -3,6 +3,7 @@
 \usepackage[T1]{fontenc}
 \usepackage[spanish,es-tabla]{babel}
 \usepackage{graphicx}
+\usepackage{array}
 \usepackage{booktabs}
 \usepackage{amsmath}
 \usepackage{url}
@@ -14,9 +15,12 @@
 
 \begin{document}
 
-\title{\includegraphics[width=2.0cm]{figuras/logo_uni.png}\\[8pt]
-Extracci\'on Autom\'atica de Resultados Electorales a partir de las Actas de
-Escrutinio de las Elecciones Generales del Per\'u 2026}
+% Logo a la IZQUIERDA del título, en una fila (columna m{} = centrado vertical)
+\title{\begin{tabular}{@{}m{2.3cm}@{\hspace{0.3cm}}m{\dimexpr\textwidth-3.0cm\relax}@{}}
+\includegraphics[width=2.1cm]{figuras/logo_uni.png} &
+\centering\arraybackslash Extracci\'on Autom\'atica de Resultados Electorales
+a partir de las Actas de Escrutinio de las Elecciones Generales del Per\'u 2026
+\end{tabular}}
 
 \author{
 \IEEEauthorblockN{Josemanuel Rossy Ca\~nari Palante, Kenny Asto Hinostroza,
