@@ -118,6 +118,20 @@ El OCR concentra el 84% del tiempo (~1.5 min/acta efectivo con 4 procesos).
 | CPU | Intel Core i5-11400H (11ª gen), 6 núcleos / 12 hilos @ 2.70 GHz |
 | RAM | 16 GB |
 | GPU | NVIDIA GeForce GTX 1650 4 GB (evaluación reportada: **solo CPU**, torch 2.12.1+cpu) |
+
+**Actualización GPU (06-jul-2026):** se habilitó CUDA (torch 2.12.1+cu126) y
+`ocr.py` detecta la GPU automáticamente. Benchmark controlado (mismas 2 actas,
+mismos recortes, misma exactitud 29/86 en ambos):
+
+| Motor | Tiempo (2 actas) | Por acta | Speedup |
+|---|---:|---:|---:|
+| CPU (i5-11400H, 1 proceso) | 114.1 s | 57.1 s | 1× |
+| **GPU (GTX 1650)** | **21.6 s** | **10.8 s** | **5.3×** |
+
+Proyección: el OCR de la muestra nacional (116 min en 4 procesos CPU) baja a
+~15-20 min en GPU con UN solo proceso; la corrida completa de 100 actas pasa
+de ~2 h 18 min a ~45 min. La exactitud no cambia (mismo modelo, misma
+aritmética; solo cambia dónde se ejecuta).
 | SO | Windows 11 Home (build 26200) |
 | Software | Python 3.13.9 · PyTorch 2.12.1 · OpenCV 5.0.0 · EasyOCR 1.7.2 · NumPy 2.3.5 · PyMuPDF · curl_cffi |
 
