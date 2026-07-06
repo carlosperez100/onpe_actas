@@ -8,6 +8,15 @@ votos por organización política, votos en blanco/nulos/impugnados), para
 transformar la información visual en **datos estructurados (JSON)** listos para
 análisis y auditoría.
 
+> 🗳️ **Resumen visual del proyecto** (pipeline, resultados con IC 95%,
+> hallazgos y entregables):
+> **https://claude.ai/code/artifact/f8bc673f-349c-43a1-9917-a08c532980f7**
+>
+> ▶️ **Correrlo tú mismo sin asistente:** doble clic en `EJECUTAR.bat`
+> (guía completa en [docs/COMO_CORRERLO.md](docs/COMO_CORRERLO.md)) ·
+> 📄 Paper IEEE/WVC bilingüe en [paper/](paper/) ·
+> 📊 Evaluación nacional en [docs/EVALUACION_NACIONAL.md](docs/EVALUACION_NACIONAL.md)
+
 ---
 
 ## Integrantes
