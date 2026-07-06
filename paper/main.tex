@@ -14,7 +14,8 @@
 
 \begin{document}
 
-\title{Automatic Extraction of Electoral Results from the Tally Sheets of the 2026 Peruvian General Elections}
+\title{\includegraphics[width=2.0cm]{figuras/logo_uni.png}\\[8pt]
+Automatic Extraction of Electoral Results from the Tally Sheets of the 2026 Peruvian General Elections}
 
 \author{
 \IEEEauthorblockN{Josemanuel Rossy Ca\~nari Palante, Kenny Asto Hinostroza,
@@ -47,6 +48,27 @@ trained on the ${\sim}43$ field--value pairs each acta provides for free.
 document analysis, optical character recognition, handwritten digit
 recognition, electoral documents, template registration
 \end{IEEEkeywords}
+
+\noindent\textbf{\textit{Resumen}}---Los resultados electorales oficiales del
+Per\'u se publican como actas de escrutinio escaneadas, lo que impide su
+procesamiento autom\'atico a gran escala. Presentamos un pipeline de extremo a
+extremo que descarga las actas del portal oficial de la ONPE, localiza 46
+campos por documento mediante una plantilla fija anclada por registro de
+marcas fiduciales, y lee los conteos manuscritos con OCR restringido a
+d\'igitos. Dos decisiones de dise\~no hacen la evaluaci\'on reproducible y sin
+anotaci\'on manual: la verdad de terreno proviene de los resultados
+oficialmente digitados que publica el mismo portal, y el conjunto de prueba es
+una muestra aleatoria nacional con semilla publicada (100 actas, 23
+departamentos). La poblaci\'on de actas es heterog\'enea: el 24\% son
+documentos nacidos digitales cuya capa de texto rinde 95.1\% de exactitud por
+campo sin visi\'on alguna. Sobre las 76 actas manuscritas escaneadas (3,268
+campos), el pipeline alcanza 59.6\% de exactitud por campo (IC 95\% [56.6,
+62.5]) y CER de 0.401, cuantificando el techo del OCR gen\'erico y motivando
+reconocedores afinados con los ${\sim}43$ pares campo--valor que cada acta
+provee gratuitamente.\\[4pt]
+\noindent\textbf{\textit{Palabras clave}}---an\'alisis de documentos,
+reconocimiento \'optico de caracteres, reconocimiento de d\'igitos
+manuscritos, documentos electorales, registro de plantilla.
 
 \section{Introduction}
 Scrutiny tally sheets (\emph{actas de escrutinio}) are the official source of
