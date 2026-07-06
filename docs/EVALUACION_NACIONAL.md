@@ -86,7 +86,42 @@ cobertura nacional.
    sobre-dimensionar el problema y da la recomendación de arquitectura
    (clasificar tipo → enrutar).
 
-## 6. Reproducción
+## 6. Detalles de implementación (tiempos, recursos y sistema)
+
+### Tiempos por etapa — corrida nacional N=100 (medidos, 04/05-jul-2026)
+
+| # | Etapa | Duración | Volumen |
+|---|---|---:|---|
+| 1 | Muestreo aleatorio + descarga (PDF + oficial) | 5.1 min | 100 PDFs (242 MB) + 100 JSON GT |
+| 2 | Conversión PDF → PNG (300 DPI) | ~4 min | 124 imágenes (2.71 GB) |
+| 3 | Preprocesamiento (deskew + CLAHE + denoise) | ~10 min | 124 imágenes (1.04 GB) |
+| 4 | Recorte por plantilla registrada (fiduciales) | 0.7 min | 3,496 recortes (269 MB) |
+| 5 | OCR (EasyOCR, 4 procesos, 76 actas manuscritas) | 116 min | 3,268 campos |
+| 6 | Evaluación vs. oficial + regla de dominio | <1 min | 76 actas |
+| 7 | Bootstrap IC 95% (10,000 réplicas) | <1 min | — |
+| | **Total de cómputo** | **≈ 2 h 18 min** | |
+
+El OCR concentra el 84% del tiempo (~1.5 min/acta efectivo con 4 procesos).
+
+### Recursos
+
+- **Red:** ~242 MB (actas) + <1 MB (API) + ~100 MB modelos EasyOCR (solo 1ª vez).
+- **Disco:** ~4.3 GB de intermedios (regenerables; excluidos del repo).
+- **Anotación manual:** 0 horas (verdad de terreno de la API oficial).
+- **Costo monetario:** 0 (software libre y datos públicos).
+
+### Sistema
+
+| Componente | Característica |
+|---|---|
+| Equipo | HP Victus 16-d0xxx (laptop) |
+| CPU | Intel Core i5-11400H (11ª gen), 6 núcleos / 12 hilos @ 2.70 GHz |
+| RAM | 16 GB |
+| GPU | NVIDIA GeForce GTX 1650 4 GB (evaluación reportada: **solo CPU**, torch 2.12.1+cpu) |
+| SO | Windows 11 Home (build 26200) |
+| Software | Python 3.13.9 · PyTorch 2.12.1 · OpenCV 5.0.0 · EasyOCR 1.7.2 · NumPy 2.3.5 · PyMuPDF · curl_cffi |
+
+## 7. Reproducción
 
 ```bash
 cd src/scraper    && python muestreo_nacional.py --n 100 --seed 2026 --out ../../data/muestra

@@ -31,8 +31,19 @@ class OCR:
         self._reader = None
         if self.backend == "easyocr":
             import easyocr  # type: ignore
+            # GPU automática: si el torch instalado tiene CUDA y hay una GPU
+            # NVIDIA, EasyOCR corre en ella (el OCR es el 84% del tiempo del
+            # pipeline; en GPU acelera varias veces). Con torch CPU-only o sin
+            # GPU, cae a CPU sin cambiar nada más. Nota: con GPU basta UN
+            # proceso (la GPU ya paraleliza); no usar --slice en ese caso.
+            try:
+                import torch  # type: ignore
+                usar_gpu = torch.cuda.is_available()
+            except ImportError:
+                usar_gpu = False
             # allowlist de dígitos en leer_numero; aquí cargamos el reader
-            self._reader = easyocr.Reader(list(idiomas), gpu=False)
+            self._reader = easyocr.Reader(list(idiomas), gpu=usar_gpu)
+            log.info("EasyOCR en %s", "GPU (CUDA)" if usar_gpu else "CPU")
         log.info("OCR backend = %s", self.backend)
 
     @staticmethod
