@@ -41,3 +41,7 @@ runs/
 # Sistema
 .DS_Store
 Thumbs.db
+
+# claves (nunca subir)
+.env
+*.key
