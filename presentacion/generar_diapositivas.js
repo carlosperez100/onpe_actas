@@ -3,9 +3,14 @@
 const pptx = new (require('pptxgenjs'))();
 const path = require('path');
 
-const REPO = 'C:/Users/infor/OneDrive/CARLOS PEREZ/MAESTRIA  UNI INTELIGENCIA ARTIFICIAL/III CICLO/CURSO Visión por Computador/04 Proyectos - Trabajos finales/Trabajo final/onpe_actas';
+// Rutas relativas al repo para que corra en cualquier maquina:
+//   node generar_diapositivas.js                 -> presentacion/Presentacion - Grupo 3.pptx
+//   node generar_diapositivas.js "ruta/salida.pptx"  -> donde tu quieras
+const REPO = path.resolve(__dirname, '..');
 const FIG = (f) => path.join(REPO, 'poster', 'figuras', f);
-const OUT = 'C:/Users/infor/OneDrive/CARLOS PEREZ/MAESTRIA  UNI INTELIGENCIA ARTIFICIAL/III CICLO/CURSO Visión por Computador/04 Proyectos - Trabajos finales/Trabajo final/Presentacion - Grupo 3.pptx';
+const OUT = process.argv[2]
+  ? path.resolve(process.argv[2])
+  : path.join(__dirname, 'Presentacion - Grupo 3.pptx');
 
 pptx.layout = 'LAYOUT_WIDE';           // 13.3 x 7.5 in
 pptx.author = 'Grupo 3 — Maestría en IA, UNI';

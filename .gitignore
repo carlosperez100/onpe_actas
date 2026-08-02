@@ -38,6 +38,11 @@ docs/papers/
 *.onnx
 runs/
 
+# Node (generador de las diapositivas)
+node_modules/
+package-lock.json
+presentacion/*.pptx
+
 # Sistema
 .DS_Store
 Thumbs.db

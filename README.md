@@ -12,6 +12,9 @@ análisis y auditoría.
 > hallazgos y entregables):
 > **https://carlosperez100.github.io/onpe_actas/resumen.html**
 >
+> 🖼️ **Póster en el navegador** (réplica web del A0, en inglés):
+> **https://carlosperez100.github.io/onpe_actas/poster.html**
+>
 > ▶️ **Correrlo tú mismo sin asistente:** doble clic en `EJECUTAR.bat`
 > (guía completa en [docs/COMO_CORRERLO.md](docs/COMO_CORRERLO.md)) ·
 > 📊 Evaluación nacional en [docs/EVALUACION_NACIONAL.md](docs/EVALUACION_NACIONAL.md)
@@ -23,8 +26,8 @@ análisis y auditoría.
 | Entregable | Dónde está | Cómo se regenera |
 |---|---|---|
 | **Paper** (inglés, formato WVC/IEEE, 5 págs, abstract 148 palabras) | [paper/main.pdf](paper/main.pdf) · versión en español: [paper/main_es.pdf](paper/main_es.pdf) | `cd paper && pdflatex main.tex` (dos pasadas) |
-| **Póster** (inglés, A0 vertical, una página) | [poster/poster.pdf](poster/poster.pdf) | `cd poster && pdflatex poster.tex` (dos pasadas) |
-| **Presentación** (español, 15 min, con notas del expositor) | genera `Presentacion - Grupo 3.pptx` | `cd presentacion && node generar_diapositivas.js` (requiere `pptxgenjs`) |
+| **Póster** (inglés, A0 vertical, una página) | PDF: [poster/poster.pdf](poster/poster.pdf) · web: **[carlosperez100.github.io/onpe_actas/poster.html](https://carlosperez100.github.io/onpe_actas/poster.html)** | `cd poster && pdflatex poster.tex` (dos pasadas); la versión web es [docs/poster.html](docs/poster.html) |
+| **Presentación** (español, 15 min, con notas del expositor) | genera `Presentacion - Grupo 3.pptx` | `cd presentacion && npm install && node generar_diapositivas.js` (acepta una ruta de salida como argumento) |
 | **Implementación** | este repositorio | ver *Reproducir los resultados del paper* |
 
 El paper también se abre en **Overleaf gratis con un clic**:
@@ -92,23 +95,35 @@ automatización del procesamiento documental electoral y apoyo a auditorías.
   parciales.
 - **Ruido visual:** sellos sobre los campos, firmas cercanas, marcas de impresión.
 - **Desbalance:** partidos con pocos votos, predominio de valores pequeños.
-- **Etiquetado:** el dataset no trae anotaciones de detección; se generan a mano.
+- **Etiquetado:** el dataset no trae anotaciones de detección. Las cajas se
+  autogeneran con la plantilla registrada; los valores de cada campo sí vienen
+  gratis de la API oficial (ver *ground truth* sin anotación manual).
 - **Complejidad documental:** múltiples formatos (presidencial vs. congresal).
 
 ## 4. Enfoque / Pipeline
 
 ```
-1. ENTRADA            Acta digitalizada (PDF → imagen)
-2. PREPROCESAMIENTO   Deskew · CLAHE · denoise · binarización/normalización
-3. DETECCIÓN          YOLOv8 localiza regiones de interés
-4. RECONOCIMIENTO     OCR (EasyOCR/Tesseract) sobre cada región
-5. SALIDA             Datos estructurados (JSON) por acta
+1. ENTRADA            Acta digitalizada (PDF → imagen, 300 dpi)
+2. PREPROCESAMIENTO   Deskew · CLAHE · denoise · binarización por celda (Otsu)
+3. DETECCIÓN          Plantilla de 46 regiones registrada sobre las marcas
+                      fiduciales (RANSAC de traslación + afín parcial)
+                      — YOLOv8/YOLOv11: trabajo futuro, aún sin pesos
+4. RECONOCIMIENTO     EasyOCR restringido a dígitos sobre cada celda limpiada
+5. SALIDA             Datos estructurados (JSON) por acta + evaluación
 ```
 
 ### Métricas de evaluación
-- **Detección:** mAP, Precision, Recall (Ultralytics `val`).
-- **Reconocimiento:** CER (Character Error Rate), WER (Word Error Rate).
-- **Desempeño general:** exactitud por campo y por documento.
+
+Lo que **se reporta** en el paper, el póster y los informes:
+
+- **Exactitud por campo:** coincidencia exacta contra el valor oficial digitado.
+- **CER:** tasa de error de caracteres sobre la cadena de dígitos.
+- **Intervalos:** bootstrap agrupado por acta (10,000 réplicas); el acta es la
+  unidad de muestreo, no el campo.
+
+Métricas de **detección** (mAP, Precision, Recall con Ultralytics `val`) y WER
+quedan para la ruta con detector aprendido: hoy la localización se resuelve por
+plantilla registrada y no hay modelo entrenado que evaluar.
 
 ## 5. Motivación, supuestos, riesgos y restricciones
 
@@ -126,20 +141,29 @@ automatización del procesamiento documental electoral y apoyo a auditorías.
 
 ```
 onpe_actas/
-├── configs/actas.yaml            # clases y rutas para YOLO
+├── EJECUTAR.bat                  # corre el pipeline completo con doble clic
+├── configs/actas.yaml            # clases y rutas para YOLO (ruta futura)
 ├── data/                         # dataset (no versionado; se regenera)
 │   ├── raw_pdf/  raw_img/  processed/  annotations/
 ├── clase_pdfs/                   # material/PDFs del curso (Teachlr)
 ├── notebooks/                    # exploración y experimentos
 ├── src/
-│   ├── scraper/                  # descarga de actas + PDF→imagen
+│   ├── scraper/                  # descarga de actas + PDF→imagen + muestreo
 │   ├── preprocessing/            # deskew, CLAHE, denoise, binarización
-│   ├── detection/                # entrenamiento e inferencia YOLO
-│   ├── recognition/              # OCR de dígitos/manuscrito
-│   ├── pipeline/                 # orquestación end-to-end
-│   └── utils/                    # métricas (CER/WER, exactitud)
-├── docs/                         # documentación del proyecto
+│   ├── detection/                # plantilla + registro fiducial (y YOLO futuro)
+│   ├── recognition/              # OCR de dígitos + línea base con LLM
+│   ├── pipeline/                 # orquestación, evaluación y estadística
+│   └── utils/                    # métricas (CER, exactitud por campo)
+├── docs/                         # informes, resumen y póster web
+│   ├── resultados/               # evidencia JSON versionada de cada corrida
+│   ├── figuras/                  # figuras de los informes y del póster web
+│   ├── resumen.html              # resumen del proyecto (GitHub Pages)
+│   └── poster.html               # réplica web del póster A0
+├── paper/                        # fuentes LaTeX y PDF del paper (EN y ES)
+├── poster/                       # fuente LaTeX y PDF del póster A0
+├── presentacion/                 # generador del PPTX de la exposición
 ├── requirements.txt
+├── CLAUDE.md
 ├── SUBIR_A_GITHUB.sh
 └── README.md
 ```
