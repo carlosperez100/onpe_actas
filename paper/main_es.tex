@@ -37,17 +37,18 @@ escrutinio escaneadas, lo que impide su procesamiento autom\'atico a gran
 escala. Presentamos un pipeline de extremo a extremo que descarga las actas
 del portal oficial de la ONPE, localiza 46 campos por documento mediante una
 plantilla fija anclada por registro de marcas fiduciales, y lee los conteos
-manuscritos con OCR restringido a d\'igitos. Dos decisiones de dise\~no hacen
-la evaluaci\'on reproducible y sin anotaci\'on manual: la verdad de terreno
-proviene de los resultados oficialmente digitados que publica el mismo
-portal, y el conjunto de prueba es una muestra aleatoria nacional con semilla
-publicada (100 actas, 23 departamentos). La poblaci\'on de actas es
-heterog\'enea: el 24\% son documentos nacidos digitales cuya capa de texto
-rinde 95.1\% de exactitud por campo sin visi\'on alguna. Sobre las 76 actas
-manuscritas escaneadas (3,268 campos), el pipeline alcanza 59.6\% de
-exactitud por campo (IC 95\% [56.6, 62.5]) y CER de 0.401, cuantificando el
-techo del OCR gen\'erico y motivando reconocedores afinados con los
-${\sim}43$ pares campo--valor que cada acta provee gratuitamente.
+manuscritos con OCR restringido a d\'igitos. La evaluaci\'on no necesita
+anotaci\'on manual: la verdad de terreno proviene de los resultados
+oficialmente digitados que publica el mismo portal, y el conjunto de prueba
+es una muestra aleatoria nacional con semilla publicada (100 actas, 23
+departamentos). La poblaci\'on de actas es heterog\'enea: el 24\% son
+documentos nacidos digitales cuya capa de texto rinde 95.1\% de exactitud por
+campo sin visi\'on alguna. Sobre las 76 actas manuscritas escaneadas (3,268
+campos), el pipeline alcanza 59.6\% de exactitud por campo (IC 95\% [56.6,
+62.5]) y CER de 0.401, frente a 48.4\% de un LLM multimodal de extremo a
+extremo con few-shot, cuantificando el techo del reconocimiento gen\'erico y
+motivando reconocedores afinados con los ${\sim}43$ pares campo--valor que
+cada acta provee gratuitamente.
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -100,7 +101,16 @@ de celdas alcanza 59.6\% de exactitud por campo (IC 95\% [56.6, 62.5],
 bootstrap agrupado). Esto acota lo que puede esperarse sin entrenamiento y
 motiva el ajuste fino de reconocedores transformer con las etiquetas
 gratuitas descritas arriba.
+\item \textbf{Una comparaci\'on cara a cara con un LLM multimodal de extremo
+a extremo.} Bajo un protocolo id\'entico, un LLM multimodal actual con
+few-shot alcanza 48.4\% frente al 60.9\% del pipeline sobre las mismas actas,
+lo que sit\'ua su valor en el arranque sin anotaci\'on y no en la exactitud
+de reconocimiento.
 \end{enumerate}
+
+% Para un envío doble ciego a WVC, comentar la nota al pie siguiente.
+El c\'odigo, los artefactos de evaluaci\'on por campo y la semilla del
+muestreo son p\'ublicos.\footnote{\url{https://github.com/carlosperez100/onpe_actas}}
 
 \section{Trabajos Relacionados}
 \textbf{Detecci\'on en tiempo real.} RT-DETR \cite{rtdetr} mostr\'o que un
@@ -167,8 +177,11 @@ Clasificar cada PDF por n\'umero de p\'aginas y capa de texto revela dos
 tipos de documento: \textbf{76 actas manuscritas} (escaneos de una p\'agina,
 capa de texto vac\'ia) y \textbf{24 actas STAE nacidas digitales} (documentos
 de dos p\'aginas firmados digitalmente, con conteos tipografiados y capa de
-texto extra\'ible). Todos los experimentos de visi\'on corren sobre las 76
-manuscritas; las STAE se procesan por parseo directo de texto
+texto extra\'ible). La mezcla misma es una estimaci\'on muestral: la
+prevalencia de nacidas digitales es 24\% con intervalo de Wilson al 95\% de
+[16.7, 33.2] --- suficiente para establecer que la poblaci\'on es mixta, no
+para fijar la proporci\'on exacta. Todos los experimentos de visi\'on corren
+sobre las 76 manuscritas; las STAE se procesan por parseo directo de texto
 (Secc.~\ref{sec:stae}).
 
 \subsection{Verdad de terreno}
@@ -325,8 +338,54 @@ v\'alido y ofrece cobertura nacional.
 
 \textbf{Actas nacidas digitales.} El parseo por capa de texto de las 24 actas
 STAE alcanza \textbf{95.12\%} (955/1,004 campos); los errores restantes
-provienen del emparejamiento de nombres, no de la lectura. El contraste con
-59.6\% cuantifica el valor de enrutar por tipo de documento.
+provienen del emparejamiento de nombres, no de la lectura. Veinticuatro actas
+bastan aqu\'i porque el parseo es determinista: la varianza entre actas est\'a
+por debajo de la binomial (ICC $\approx 0$, efecto de dise\~no 1.0), de modo
+que el intervalo bootstrap agrupado es [94.5, 95.7], nueve veces m\'as
+estrecho que el de las manuscritas, cuyo efecto de dise\~no es 3.07 para un
+n\'umero comparable de campos. La brecha de 35.5 puntos (IC 95\% [32.6,
+38.5]) cuantifica el valor de enrutar por tipo de documento.
+
+\subsection{L\'inea base con LLM multimodal de extremo a extremo}
+\label{sec:llm}
+Una alternativa natural al pipeline modular es entregar la p\'agina completa
+a un LLM multimodal junto con unos pocos ejemplos resueltos, para que
+localice y lea en un solo paso. Evaluamos esa l\'inea base\footnote{Gemini
+2.5 Flash, capa gratuita, accedido en julio de 2026. C\'odigo:
+\texttt{src/recognition/llm\_ocr.py}.}: el modelo recibe la imagen completa
+del acta m\'as dos ejemplos imagen--JSON y debe devolver el JSON de conteos,
+sin plantilla, sin registro y sin motor OCR. Ambos sistemas se puntean sobre
+las mismas 15 actas manuscritas (645 campos) con el mismo protocolo
+(Tabla~\ref{tab:llm}).
+
+\begin{table}[t]
+\caption{Pipeline modular vs.\ LLM few-shot de extremo a extremo sobre las
+mismas 15 actas manuscritas (645 campos).}
+\label{tab:llm}
+\centering
+\begin{tabular}{lrr}
+\toprule
+M\'etodo & Exact. (\%) & CER \\
+\midrule
+\textbf{Pipeline (plantilla registrada + OCR)} & \textbf{60.93} & \textbf{0.395} \\
+LLM few-shot, extremo a extremo (2 ejemplos) & 48.37 & 0.591 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+El pipeline gana por 12.6 puntos. El LLM interpreta bien la estructura del
+formulario, pero no est\'a entrenado para d\'igitos manuscritos peruanos y se
+degrada m\'as r\'apido en escaneos de baja calidad: en las dos peores actas
+cae a 20.9\% y 23.3\% donde el pipeline a\'un lee 34.9\% y 53.5\%, porque el
+recorte le entrega al reconocedor una celda aislada mientras que el LLM debe
+lidiar con el ruido circundante. Esto es coherente con DTrOCR \cite{dtrocr}:
+el reconocimiento fuerte de manuscrito proviene del entrenamiento
+espec\'ifico, no de la capacidad general. Su ventaja es ortogonal a la
+exactitud --- no requiri\'o ingenier\'ia de detecci\'on alguna, mientras que
+el pipeline necesit\'o calibrar la plantilla y el registro fiducial ---, lo
+que lo vuelve \'util como anotador inicial para un formato nuevo y como
+pre-etiquetador cuya salida un humano corrige, no como reemplazo de un
+reconocedor especializado.
 
 \subsection{An\'alisis de errores}
 Los errores restantes se concentran en: d\'igitos delgados aislados que la
@@ -344,14 +403,18 @@ evaluaci\'on que no necesita anotaci\'on manual. Destacan tres lecciones de
 dise\~no: registrar las plantillas sobre las marcas fiduciales del formulario
 antes de cualquier recorte por coordenadas fijas; separar la sem\'antica de
 dominio (blanco $=$ 0) del desempe\~no de visi\'on; y clasificar el tipo de
-documento antes de elegir la ruta de procesamiento. El techo cuantificado del
+documento antes de elegir la ruta de procesamiento. Una cuarta lecci\'on
+viene de la l\'inea base con LLM: promptear un modelo multimodal general de
+extremo a extremo es m\'as barato de construir pero 12.6 puntos menos exacto
+(48.4\%), de modo que en esta tarea la generalidad a\'un no sustituye a la
+especializaci\'on. El techo cuantificado del
 OCR gen\'erico motiva los siguientes pasos: ajustar finamente un reconocedor
 transformer \cite{trocr,dtrocr} con los pares campo--valor gratuitos
 (${\sim}43$ por acta, ${\sim}43{,}000$ con 1,000 actas), entrenar detectores
 aprendidos (YOLOv11, RT-DETR \cite{rtdetr}) con etiquetas autogeneradas por
 la plantilla registrada, comparar el pipeline modular contra analizadores
-unificados \cite{omniparser,donut}, y explorar el etiquetado few-shot con
-LLM como fuente complementaria de anotaci\'on.
+unificados \cite{omniparser,donut}, y usar el LLM como pre-etiquetador en el
+ciclo de correcci\'on humana que produce el conjunto de ajuste fino.
 
 \begin{thebibliography}{9}
 \bibitem{rtdetr} Y.~Zhao, W.~Lv, S.~Xu, J.~Wei, G.~Wang, Q.~Dang, Y.~Liu,

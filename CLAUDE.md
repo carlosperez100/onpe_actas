@@ -24,5 +24,12 @@ Si la descarga falla, revisar `BASE_URL`/`build_acta_url` en
 `src/scraper/download_actas.py`. ONPE cambia rutas entre procesos.
 
 ## Cómo correr rápido
-Ver sección "Uso rápido" del README. Sin pesos entrenados, el pipeline requiere
-primero anotar y entrenar el detector (`detect.py train`).
+Ver "Reproducir los resultados del paper" en el README (ruta evaluada:
+plantilla registrada por fiduciales + OCR de dígitos; NO requiere pesos
+entrenados). `detect.py train` es la ruta con detector aprendido y sigue
+siendo trabajo futuro.
+
+## Entregables del trabajo final
+`paper/` (WVC/IEEE, EN + ES), `poster/` (A0 vertical, EN),
+`presentacion/generar_diapositivas.js` (PPTX en español). Todos se regeneran
+con los comandos de la tabla "Entregables" del README.

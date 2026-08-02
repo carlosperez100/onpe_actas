@@ -14,8 +14,22 @@ análisis y auditoría.
 >
 > ▶️ **Correrlo tú mismo sin asistente:** doble clic en `EJECUTAR.bat`
 > (guía completa en [docs/COMO_CORRERLO.md](docs/COMO_CORRERLO.md)) ·
-> 📄 Paper IEEE/WVC bilingüe en [paper/](paper/) ·
 > 📊 Evaluación nacional en [docs/EVALUACION_NACIONAL.md](docs/EVALUACION_NACIONAL.md)
+
+---
+
+## Entregables del trabajo final
+
+| Entregable | Dónde está | Cómo se regenera |
+|---|---|---|
+| **Paper** (inglés, formato WVC/IEEE, 5 págs, abstract 148 palabras) | [paper/main.pdf](paper/main.pdf) · versión en español: [paper/main_es.pdf](paper/main_es.pdf) | `cd paper && pdflatex main.tex` (dos pasadas) |
+| **Póster** (inglés, A0 vertical, una página) | [poster/poster.pdf](poster/poster.pdf) | `cd poster && pdflatex poster.tex` (dos pasadas) |
+| **Presentación** (español, 15 min, con notas del expositor) | genera `Presentacion - Grupo 3.pptx` | `cd presentacion && node generar_diapositivas.js` (requiere `pptxgenjs`) |
+| **Implementación** | este repositorio | ver *Reproducir los resultados del paper* |
+
+El paper también se abre en **Overleaf gratis con un clic**:
+[abrir proyecto](https://www.overleaf.com/docs?snip_uri=https://raw.githubusercontent.com/carlosperez100/onpe_actas/main/paper/overleaf.zip)
+(para la versión en español: Menu → Settings → Main document → `main_es.tex`).
 
 ---
 
@@ -45,10 +59,14 @@ Elecciones Generales del Perú 2026.
 **Objetivos específicos**
 
 1. Construir un dataset de actas obtenidas del portal oficial de la ONPE.
-2. Detectar las regiones de interés mediante *Object Detection* (YOLOv8).
+2. Detectar las regiones de interés. **Implementado** con plantilla de layout
+   fijo registrada sobre las marcas fiduciales del formulario (el detector
+   aprendido YOLOv8/YOLOv11 quedó como trabajo futuro: no había etiquetas, y
+   esta misma plantilla es la que las autogenera).
 3. Reconocer los valores numéricos registrados (OCR de dígitos manuscritos).
 4. Transformar la información en datos estructurados (JSON).
-5. Evaluar el sistema con métricas de detección y reconocimiento.
+5. Evaluar el sistema con métricas de reconocimiento (exactitud por campo y
+   CER) contra el ground truth oficial, con intervalos de confianza.
 
 ## 3. Dataset
 
@@ -133,22 +151,92 @@ python -m venv .venv && source .venv/bin/activate   # Windows: .venv\Scripts\act
 pip install -r requirements.txt
 ```
 
-## Uso rápido
+**GPU (opcional, OCR ~5× más rápido).** `easyocr` instala PyTorch en versión CPU.
+Para usar GPU, instalar antes el build CUDA correspondiente a tu driver, p. ej.:
 
 ```bash
-# 1) Descargar actas de la ONPE
-python src/scraper/download_actas.py --tipo presidencial --max 200 --out data/raw_pdf
+pip install torch --index-url https://download.pytorch.org/whl/cu126
+```
 
-# 2) Convertir PDF a imágenes
-python src/scraper/pdf_to_images.py --in data/raw_pdf --out data/raw_img --dpi 300
+`src/recognition/ocr.py` detecta la GPU automáticamente (medido: 57 → 10.8 s/acta
+en una GTX 1650, misma exactitud). Con GPU conviene **un solo proceso** (sin
+`--slice`). En Windows, si conviven `torch` y `cv2`, exportar
+`KMP_DUPLICATE_LIB_OK=TRUE`.
 
-# 3) Preprocesar
-python src/preprocessing/preprocess.py --in data/raw_img --out data/processed
+---
 
-# 4) (tras anotar) Entrenar el detector
+## Reproducir los resultados del paper
+
+Esta es la ruta **evaluada** (plantilla registrada por fiduciales + OCR de
+dígitos), la que produjo el 59.58% del paper. La ruta con detector aprendido
+(YOLO) es trabajo futuro y se documenta más abajo.
+
+**Windows — un solo paso:** doble clic en `EJECUTAR.bat` (o `EJECUTAR.bat 100`
+para replicar la muestra nacional completa). Guía detallada:
+[docs/COMO_CORRERLO.md](docs/COMO_CORRERLO.md).
+
+**Etapa por etapa** (multiplataforma). Cada script se corre **desde su propia
+carpeta con rutas relativas**: OpenCV en Windows no abre rutas con tildes.
+
+```bash
+# 0) muestra aleatoria nacional reproducible (semilla publicada) + descarga + ground truth
+cd src/scraper       && python muestreo_nacional.py --n 100 --seed 2026 --out ../../data/muestra
+                        python pdf_to_images.py --in ../../data/muestra/raw_pdf --out ../../data/muestra/raw_img --dpi 300
+# 1) preprocesamiento (deskew + CLAHE + denoise)
+cd ../preprocessing  && python preprocess.py --in ../../data/muestra/raw_img --out ../../data/muestra/processed
+# 2) detección de regiones por plantilla registrada en marcas fiduciales
+cd ../detection      && python regiones_plantilla.py --in ../../data/muestra/processed --out ../../data/muestra/crops
+# 3) reconocimiento (EasyOCR restringido a dígitos) -> JSON por acta
+cd ../pipeline       && python piloto_10_actas.py --modo limpio --crops ../../data/muestra/crops \
+                            --gt ../../data/muestra/ground_truth --out ../../data/muestra/salida
+# 4) evaluación por campo y CER contra el ground truth oficial (regla vacío=0)
+                        python evaluar_salidas.py --salidas ../../data/muestra/salida \
+                            --gt ../../data/muestra/ground_truth --regla-cero --out ../../data/muestra/evaluacion.json
+# 5) IC 95% por bootstrap agrupado por acta (10,000 réplicas)
+                        python analisis_estadistico.py --eval ../../data/muestra/evaluacion.json \
+                            --muestra ../../data/muestra/muestra.json --out ../../data/muestra/analisis.json
+```
+
+**Actas electrónicas (STAE), sin OCR** — el 24% de la muestra:
+
+```bash
+cd src/scraper && python extraer_electronicas.py --tipos ../../data/muestra/tipos.json \
+    --pdf ../../data/muestra/raw_pdf --gt ../../data/muestra/ground_truth \
+    --out ../../data/muestra/electronicas.json
+```
+
+**Comparación contra un LLM multimodal (few-shot)** — requiere `.env` con
+`GEMINI_API_KEY` (capa gratuita; el archivo **no** se versiona):
+
+```bash
+cd src/recognition && python llm_ocr.py --n 15 --shots 2 --out ../../data/muestra/salida_llm
+```
+
+### Resultados esperados y evidencia versionada
+
+| Corrida | Resultado | Evidencia en el repo |
+|---|---|---|
+| Nacional, plantilla registrada + regla vacío=0 | **59.58%** exactitud por campo, IC 95% [56.61, 62.48], CER 0.401 | `docs/resultados/analisis_nacional_v5.json` |
+| Nacional, ablaciones (plantilla fija / OCR crudo) | 26.81% · 38.00% · 50.86% | `docs/resultados/evaluacion_nacional_*.json` |
+| Piloto 10 actas, ablación v1→v4 | 43.95% → 58.37% | `docs/resultados/evaluacion_v[1-4]_*.json` |
+| Actas electrónicas STAE (sin visión) | 95.12% (955/1,004 campos) | `docs/resultados/evaluacion_stae_electronicas.json` |
+| Pipeline vs LLM few-shot (mismas 15 actas) | 60.93% vs 48.37% | `docs/resultados/evaluacion_llm_gemini.json` |
+
+Las métricas se pueden **re-calcular sin volver a correr el OCR** con
+`src/pipeline/evaluar_salidas.py` sobre las salidas ya guardadas.
+Informes: [docs/EVALUACION_NACIONAL.md](docs/EVALUACION_NACIONAL.md),
+[docs/PILOTO_VIABILIDAD.md](docs/PILOTO_VIABILIDAD.md),
+[docs/EXPERIMENTO_LLM.md](docs/EXPERIMENTO_LLM.md).
+
+---
+
+## Ruta con detector aprendido (trabajo futuro)
+
+Aún **sin pesos entrenados**: requiere anotar (o autogenerar etiquetas con la
+plantilla registrada) y entrenar antes de inferir.
+
+```bash
 python src/detection/detect.py train --data configs/actas.yaml --epochs 100
-
-# 5) Pipeline completo -> JSON estructurado
 python src/pipeline/run_pipeline.py --source data/raw_img \
     --weights src/detection/runs/detect/train/weights/best.pt --out data/salida
 ```
